@@ -74,6 +74,29 @@ def away_time_to_independence(hours_away:float) -> str:
 def ask_activity_level():
     # make this criteria more specific or stick w/ a booleanish question?
     # Perhaps ask in a week, how often would they go out w/ the pet?
+    
+    # maybe we should use fuzzy logic and just ask them for a range like
+    # time_input = input("On a scale from 1 to 10, with 1 being 'very little time' and 10 being 'a lot of time', how much time are you willing to/can spend on your pet each day? ")
+    # then we divide this value by 10 to match the values in the criteria
+    # My attempt to code this lmao
+    #try:
+    #    time_value = int(time_input)
+    #    if 1 <= time_value <= 10:
+    #        print("Thank you for your input.")
+    #        time_value = time_value / 10  # normalize the time value to a range of 0 to 1
+    #        if time_value < 0.3:
+    #            return "very_inactive"
+    #        elif time_value < 0.6:
+    #            return "inactive"
+    #        elif time_value < 0.8:
+    #            return "active"
+    #        else:
+    #            return "very_active"
+    #     else:
+    #        print("Please enter a number between 1 and 10.")
+    #     except ValueError:
+    #        print("Invalid input. Please enter a number.")
+    
     ans = input("Do you want to do outdoor activities with the pet (y/n)? ")
 
 def desribe_living_space():
@@ -85,6 +108,7 @@ def desribe_living_space():
         return LIVING_SPACE
     except ValueError:
         return desribe_living_space()
+        
 def living_space_to_living_space(living_space:float):
     # as the living space increases, recommend pets that require more space
     if living_space < 3:
@@ -95,9 +119,18 @@ def living_space_to_living_space(living_space:float):
         return "large"
 
 # TODO: ask allergies or list allergies below, if allergy is not in the li
-# method 1: ask for allergies but how would it be weighed?
+# method 1: ask for allergies but how would it be weighed? 
 # method 2: list common allergies but still how would it be weighed?
 COMMON_ALLERGIES = ["dust", "pollen", "mold", "pet dander", "food", "insect stings", "medications"]
+
+# I dont think the listed elements work since if were talking about rabbits, dogs, and cats its probably just dander they secrete
+# however I read online something that says
+# "the proteins contained in cat and dog dander differ slightly which is why some people may be allergic to one animal and not the other."
+# so maybe we should go for this instead
+# ALLERGIES_PROTEINS = [" Can f 1", "Fel d 1", "Ory c 1"]
+# then if there's no reaction to any of them then they're ok to recommend??
+# https://docs.google.com/document/d/1k0_Oi9CPuABHVaWX1n4abYdqyVi732uiJkEB-RA64FQ/edit?usp=sharing link sa research kong ginawa
+
 def ask_allergen_threshold():
     # as the allergen threshold increases, recommend pets that are less likely to trigger allergies
     # ask common allergies, then recommend pets that are less likely to trigger those allergies
